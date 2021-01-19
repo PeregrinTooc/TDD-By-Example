@@ -18,4 +18,8 @@ class testFranc(unittest.TestCase):
         fiveDollars = Franc(5)
         self.assertEquals(Franc(10),fiveDollars.times(2))
         self.assertEquals(Franc(15),fiveDollars.times(3))
+    
+    def testEquality(self):
+        self.assertEquals(Franc(5), Franc(5))
+        self.assertNotEqual(Franc(5), Franc(6))         
 
