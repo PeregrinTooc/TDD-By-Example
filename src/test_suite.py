@@ -1,9 +1,8 @@
 import unittest
-from unittest.main import TestProgram
 from multiCurrency import Dollar
 
 
-class Dollar(unittest.TestCase):
+class multiplication(unittest.TestCase):
     def testMultiplication(self):
         fiveDollars = Dollar(5)
         self.assertEquals(Dollar(10),fiveDollars.times(2))
@@ -11,5 +10,4 @@ class Dollar(unittest.TestCase):
 
     def testEquality(self):
         self.assertEquals(Dollar(5), Dollar(5))
-        self.assertNotEquals(Dollar(5), Dollar(6))         
-
+        self.assertNotEqual(Dollar(5), Dollar(6))         
