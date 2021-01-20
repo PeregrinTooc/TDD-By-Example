@@ -1,4 +1,4 @@
-#Delete testFranc for Multiplication?
+#Delete testFranc for Multiplication?  
 
 import unittest
 import multiCurrency
@@ -6,25 +6,26 @@ from multiCurrency import Money
 
 
 class testMultiplication(unittest.TestCase):
-    def testDollar(self):
-        fiveDollars = multiCurrency.makeDollar(5)
-        self.assertEquals(multiCurrency.makeDollar(10),fiveDollars.times(2))
-        self.assertEquals(multiCurrency.makeDollar(15),fiveDollars.times(3))
+    def testSimple(self):
+        five = Money(5,'USD')
+        self.assertEquals(Money(10,'USD'),five.times(2))
+        self.assertEquals(Money(15,'USD'),five.times(3))
 
-    def testFranc(self):
-        fiveFrancs = multiCurrency.makeFranc(5)
-        self.assertEquals(multiCurrency.makeFranc(10),fiveFrancs.times(2))
-        self.assertEquals(multiCurrency.makeFranc(15),fiveFrancs.times(3))
     
 
 class testEquality(unittest.TestCase):
-    def testDollar(self):
+    def testEquals(self):
         self.assertEquals(multiCurrency.makeDollar(5), multiCurrency.makeDollar(5))
-        self.assertNotEqual(multiCurrency.makeDollar(5), multiCurrency.makeDollar(6))         
-    
-    def testFranc(self):
-        self.assertEquals(multiCurrency.makeFranc(5), multiCurrency.makeFranc(5))
-        self.assertNotEqual(multiCurrency.makeFranc(5), multiCurrency.makeFranc(6))         
+        self.assertEquals(multiCurrency.makeFranc(5), Money(5, 'CHF'))
 
-    def testMixed(self):
+    def testNotEquals(self):
+        self.assertNotEqual(multiCurrency.makeDollar(5), multiCurrency.makeDollar(6))         
         self.assertNotEqual(multiCurrency.makeFranc(5),multiCurrency.makeDollar(5))
+
+
+class TestCurrency(unittest.TestCase):
+    def testFranc(self):
+        self.assertEquals(multiCurrency.makeFranc(1).getCurrency(), 'CHF')
+    
+    def testDollar(self):
+        self.assertEquals(multiCurrency.makeDollar(1).getCurrency(), 'USD')

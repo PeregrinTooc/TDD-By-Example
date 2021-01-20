@@ -2,33 +2,26 @@
 #table lookup?
 #equal null?
 #equal other object?
-# Common times
-#Currency?
 
 
 from abc import ABC, abstractmethod 
 
 def makeDollar(amount):
-    return Dollar(amount)
+    return Money(amount, 'USD')
 
 def makeFranc(amount):
-    return Franc(amount)
-class Money(ABC):
-    def __init__(self,amount):
+    return Money(amount, 'CHF')
+class Money:
+    def __init__(self,amount,currency):
         self._amount = amount
+        self._currency = currency
 
     def __eq__(self, other):
-        return ( self._amount == other._amount and self.__class__ == other.__class__ )
-    
-    @abstractmethod
+        return ( self._amount == other._amount and self._currency == other._currency )
+
     def times(self, multiplicator):
-        pass
-class Dollar(Money):
+        return Money(self._amount * multiplicator, self._currency)
 
-    def times(self,multiplicator):
-        return Dollar(self._amount * multiplicator)
+    def getCurrency(self):
+        return self._currency
     
-class Franc(Money):
-
-    def times(self,multiplicator):
-        return Franc(self._amount * multiplicator)    
