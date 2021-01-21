@@ -14,6 +14,9 @@ def makeDollar(amount):
 
 
 def makeFranc(amount):
+    """
+    returns Francs
+    """
     return Money(amount, 'CHF')
 
 
