@@ -31,7 +31,7 @@ class testMultiplication(commonTest):
 class testEquality(unittest.TestCase):
     def testEquals(self):
         self.assertEqual(makeDollar(5),
-                          makeDollar(5))
+                         makeDollar(5))
 
     def testNotEquals(self):
         self.assertNotEqual(makeDollar(5),

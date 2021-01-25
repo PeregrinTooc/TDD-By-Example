@@ -6,9 +6,6 @@
 # sum commutative?
 
 
-from abc import ABC, abstractmethod
-
-
 def makeDollar(amount):
     return Money(amount, 'USD')
 
@@ -38,15 +35,13 @@ class Bank:
             return self.rates[(sourceCurrency, targetCurrency)]
 
 
-class Expression(ABC):
-    @abstractmethod
+class Expression():
     def reduce(self, to):
         pass
 
     def __add__(self, other):
         return Sum(self, other)
 
-    @abstractmethod
     def times(self, multiplicator):
         pass
 
