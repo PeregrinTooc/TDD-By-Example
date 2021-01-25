@@ -16,8 +16,8 @@ class testMultiplication(commonTest):
 
     def testSimple(self):
         five = makeDollar(5)
-        self.assertEquals(makeDollar(10), five.times(2))
-        self.assertEquals(makeDollar(15), five.times(3))
+        self.assertEqual(makeDollar(10), five.times(2))
+        self.assertEqual(makeDollar(15), five.times(3))
 
     def testSum(self):
         fiveDollars = makeDollar(5)
@@ -25,12 +25,12 @@ class testMultiplication(commonTest):
         sum = tenFrancs + fiveDollars
         expected = makeDollar(20)
         actual = self.bank.reduce(sum.times(2), 'USD')
-        self.assertEquals(actual, expected)
+        self.assertEqual(actual, expected)
 
 
 class testEquality(unittest.TestCase):
     def testEquals(self):
-        self.assertEquals(makeDollar(5),
+        self.assertEqual(makeDollar(5),
                           makeDollar(5))
 
     def testNotEquals(self):
@@ -42,10 +42,10 @@ class testEquality(unittest.TestCase):
 
 class TestCurrency(unittest.TestCase):
     def testFranc(self):
-        self.assertEquals(makeFranc(1).getCurrency(), 'CHF')
+        self.assertEqual(makeFranc(1).getCurrency(), 'CHF')
 
     def testDollar(self):
-        self.assertEquals(makeDollar(1).getCurrency(), 'USD')
+        self.assertEqual(makeDollar(1).getCurrency(), 'USD')
 
 
 class testAddition(commonTest):
@@ -55,24 +55,24 @@ class testAddition(commonTest):
     def testSameCurrency(self):
         sum = makeDollar(5) + makeDollar(5)
         reduced = self.bank.reduce(sum, 'USD')
-        self.assertEquals(reduced, makeDollar(10))
+        self.assertEqual(reduced, makeDollar(10))
 
     def testDifferentCurrencies(self):
         sum = makeDollar(5) + makeFranc(10)
         reduced = self.bank.reduce(sum, 'USD')
-        self.assertEquals(reduced, makeDollar(10))
+        self.assertEqual(reduced, makeDollar(10))
 
     def testPlusReturnsASum(self):
         five = makeDollar(5)
         sum = five + five
-        self.assertEquals(sum._augend, five)
-        self.assertEquals(sum._addend, five)
+        self.assertEqual(sum._augend, five)
+        self.assertEqual(sum._addend, five)
 
     def testSumPlusMoney(self):
         five = makeDollar(5)
         sum = five + five
         sum += makeFranc(10)
-        self.assertEquals(self.bank.reduce(sum, 'USD'), makeDollar(15))
+        self.assertEqual(self.bank.reduce(sum, 'USD'), makeDollar(15))
 
 
 class testReduce(commonTest):
@@ -90,10 +90,10 @@ class testReduce(commonTest):
 
     def testReduceMoneyWithDifferentCurrencies(self):
         result = self.cut(makeFranc(2), 'USD')
-        self.assertEquals(result, makeDollar(1))
+        self.assertEqual(result, makeDollar(1))
 
 
 class testBank(unittest.TestCase):
     def testIdentityRate(self):
         actualRate = Bank().getRate('EUR', 'EUR')
-        self.assertEquals(actualRate, 1)
+        self.assertEqual(actualRate, 1)
