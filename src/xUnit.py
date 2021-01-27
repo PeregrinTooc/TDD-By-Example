@@ -20,25 +20,17 @@ class WasRun(TestCase):
         super().__init__(name)
 
     def testMethod(self):
-        self.wasRun = 1
+        self.log += "testMethod "
 
     def setUp(self):
-        self.wasRun = False
-        self.wasSetup = 1
+        self.log = "setup "
 
 
 class TestCaseTest(TestCase):
-    def setUp(self):
+    def testTemplateMethod(self):
         self.cut = WasRun("testMethod")
-
-    def testRunning(self):
         self.cut.run()
-        assert(self.cut.wasRun)
-
-    def testSetUp(self):
-        self.cut.run()
-        assert(self.cut.wasSetup)
+        assert(self.cut.log.count("setup testMethod ") == 1)
 
 
-TestCaseTest("testRunning").run()
-TestCaseTest("testSetUp").run()
+TestCaseTest("testTemplateMethod").run()
