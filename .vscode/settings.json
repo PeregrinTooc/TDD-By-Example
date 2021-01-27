@@ -14,7 +14,7 @@
     "runOnSave.commands": [
         {
             "match": ".*\\.py$",
-            "command": "python3 -m unittest discover src",
+            "command": "python3 ${file}",
             "runIn": "terminal"
         }
     ]
